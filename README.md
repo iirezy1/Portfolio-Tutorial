@@ -1,5 +1,8 @@
 ## بالعربي
 
+رابط التجربة 
+https://portfolio-tutorial.pages.dev/
+
 ### 📄 وصف المشروع
 هذا المشروع هو موقع شخصي تم إنشاؤه باستخدام HTML و CSS. تم تصميم الموقع ليكون متجاوبًا، مما يعني أنه يتكيف جيدًا مع أحجام الشاشات المختلفة. يتوفر درس يشرح المشروع على يوتيوب.
 
@@ -21,6 +24,9 @@
 3. افتح ملف `index.html` باستخدام متصفحك.
 
 ## English
+
+Demo : 
+https://portfolio-tutorial.pages.dev/ 
 
 ### 📄 Project Description
 This project is a personal website created using HTML and CSS. The site is designed to be **responsive**, meaning it adapts well to different screen sizes. A tutorial explaining the project is available on YouTube.
