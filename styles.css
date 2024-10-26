@@ -299,6 +299,9 @@ hr{
         padding: 5rem 0rem;
         gap: 3rem;
     }
+    .projectTitle{
+        margin-left: 1rem;
+    }
     .works ul{
         flex-direction: column;
         gap: 1rem;
