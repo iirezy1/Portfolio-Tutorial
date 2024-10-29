@@ -100,42 +100,31 @@ hr{
     max-width: 1200px;
     gap: 10rem;
 }
-
-.aboutMeParagraf {
-    text-align: justify;
-}
-
-.aboutName{
-    font-size: 3rem;
-    color: #EEEEEE;
-    margin: 0px;
-}
-
-
-
-.aboutTitle{
-    font-size: 3rem;
-    color: #00ADB5;
-    margin: 0px;
-}
-
 .textContainer{
     display: flex;
     flex-direction: column;
-    & p{
-       text-wrap: wrap; 
-       color: rgba(238,238,238, 0.75);
-    }
 }
-
 .textTitle{
     display: flex;
     align-items: center;
     gap: 5px;
+    font-size: 2rem;
+}
+.aboutName{
+    color: #EEEEEE;
+}
+.aboutTitle{
+    color: #00ADB5;
+}
+.aboutMeParagraf {
+    text-align: justify; 
+    color: rgba(238,238,238, 0.75);
 }
 
+
+
 .works {
-    background-image: url('./assets/svg/background.svg');
+    background-image: url('assets/svg/background.svg');
     padding: 10rem 10rem ;
     margin: 5rem 0rem;
 }
@@ -153,31 +142,27 @@ hr{
     align-items: center;
     justify-content: left;
     gap: 5px;
+    font-size: 2rem;
 }
 .works ul{
     display: flex;
     list-style-type: none;
-    padding: 0;
     align-items: center;
     justify-content: space-between;
 }
-.works ul li {
+.works li {
     border-radius: 16px;
     background-color: rgba(57,62,70, 0.5);
     backdrop-filter: blur(4px);
     padding: 1rem 4rem;
 }
-
-
-
-.works ul li img {
+.works li img {
     width: 200px;
     height: 200px;
     object-fit: contain;
     transition: transform .2s;
 }
-
-.works ul li :hover {
+.works li :hover {
     transform: scale(1.5);   
 }
 
@@ -187,9 +172,17 @@ hr{
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    gap: 5px;
+    gap: 2rem ;
     margin: 2rem auto;
     max-width: 1200px;
+}
+.contactTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    font-size: 2rem;
 }
 .contact{
     display: flex;
@@ -197,26 +190,16 @@ hr{
     justify-content: center;
     margin-right: 5rem;
     gap: 20rem;
-    & h3{
-        color :#EEEEEE
-    }
+}
+.contact h3 , .contact a{
+    color :#EEEEEE;
+    text-decoration: none;
 }
 .emailAndPhone{
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
-    a{
-        text-decoration: none;
-    }
-}
-
-.contactTitle{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    margin-bottom: 10px;
 }
 
 .socialMedia{
@@ -224,29 +207,29 @@ hr{
     align-items: center;
     justify-content: center;
     gap: 3rem;
-    & a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50px;
-        background-color: rgba(57,62,70, 0.5);
-        backdrop-filter: blur(4px);
-        padding: 1rem;
-        img {
-            width: 24px;
-            height: 24px;
-        }
-    }
 }
+.socialMedia a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    background-color: rgba(57,62,70, 0.5);
+    backdrop-filter: blur(4px);
+    padding: 1rem;
+}
+.socialMedia img {
+    width: 24px;
+    height: 24px;
+}
+
 footer{
-    background-color: #222831;
     color: #EEEEEE;
     padding: 2rem;
     text-align: center;
 }
 
 
-@media  (max-width: 768px) {
+@media  (max-width: 1023px) {
     header {
         margin-left: 1rem;
         margin-right: 1rem;
@@ -254,8 +237,6 @@ footer{
     .hero{
         flex-direction: column;
         align-items: center;
-        margin: 5rem 0rem ;
-        font-size: 1rem;
         gap: 2rem;
     }
     .heroImg {
@@ -269,9 +250,7 @@ footer{
     }
     .aboutMe{
         flex-direction: column-reverse;
-        justify-content: center;
         align-items: center;
-        margin: 5rem 0rem ;
         gap: 2rem;
     }
     .textContainer{
@@ -283,11 +262,7 @@ footer{
     .aboutName , .aboutTitle{
         font-size: 2rem;
     }
-    .aboutMeParagraf{
-        margin: 0;
-        text-align: justify;
-    }
-    .lightbulb {
+    .light {
         width: 60px;
     }
     .aboutMeImg{
@@ -295,8 +270,6 @@ footer{
     }
     .works{
         padding: 0;
-        width: 100%;
-        height: 100%;
     }
     .worksContainer{
         padding: 5rem 0rem;
@@ -315,7 +288,7 @@ footer{
     }
     .contact{
         flex-direction: column;
-        gap: 0;
+        gap: 1rem;
         margin-right: 0;
     }
 
