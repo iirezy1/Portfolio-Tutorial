@@ -1,10 +1,16 @@
 ## بالعربي
 
 رابط التجربة 
-https://portfolio-tutorial.pages.dev/
+https://tutorial-project-tz9l8.kinsta.page/
 
 ### 📄 وصف المشروع
-هذا المشروع هو موقع شخصي تم إنشاؤه باستخدام HTML و CSS. تم تصميم الموقع ليكون متجاوبًا، مما يعني أنه يتكيف جيدًا مع أحجام الشاشات المختلفة. يتوفر درس يشرح المشروع على يوتيوب.
+هذا المشروع هو موقع شخصي تم إنشاؤه باستخدام HTML و CSS. تم تصميم الموقع ليكون متجاوبًا، مما يعني أنه يتكيف جيدًا مع أحجام الشاشات المختلفة.<br>
+وهذا المشروع مصنوع خصيصا لشرح تعليمي على يوتيوب: [رابط الشرح](https://youtu.be/VzAxCThj_5k?si=4WwLBuOnbGhgAQ2q).
+
+
+### 💡 شكر خاص
+تم استلهام تصميم هذا الموقع من [تصميم فيغما](https://www.figma.com/community/file/1175755450846438274/portfolio-website-design)، لذا نشكر **المصمم الأصلي** على عمله الرائع.
+
 
 ### 🖥️ كيفية تشغيل المشروع
 لتشغيل المشروع، يمكنك استخدام إضافة **Live Server** على محرر VS Code لتشغيل الموقع مباشرة.  
@@ -26,10 +32,14 @@ https://portfolio-tutorial.pages.dev/
 ## English
 
 Demo : 
-https://portfolio-tutorial.pages.dev/ 
+https://tutorial-project-tz9l8.kinsta.page/
 
 ### 📄 Project Description
-This project is a personal website created using HTML and CSS. The site is designed to be **responsive**, meaning it adapts well to different screen sizes. A tutorial explaining the project is available on YouTube.
+This project is a personal website created using HTML and CSS. The site is designed to be **responsive**, meaning it adapts well to different screen sizes. <br>
+This project is specifically made for an educational tutorial on YouTube: [Tutorial Link](https://youtu.be/VzAxCThj_5k?si=4WwLBuOnbGhgAQ2q).
+
+### 💡 Special Thanks
+This website design was inspired by a [Figma template](https://www.figma.com/community/file/1175755450846438274/portfolio-website-design), so special thanks to the **original designer** for their amazing work.
 
 ### 🖥️ How to Run the Project
 To run the project, you can use the Live Server extension on VS Code to launch the website directly.
