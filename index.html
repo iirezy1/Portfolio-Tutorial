@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر SHOP_TA1 للألعاب والإلكترونيات</title>
+    <title>MINECRAFT_HUB - متجر مودات وإضافات ماينكرافت</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap");
+        
+        :root {
+            --primary: #00adb5;
+            --primary-dark: #008e94;
+            --dark: #0f172a;
+            --darker: #0a1120;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --dark-gray: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
         
         * {
             margin: 0;
@@ -16,485 +30,1282 @@
         }
 
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
         }
 
+        /* التصميم العام */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: var(--primary);
+            color: var(--light);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 173, 181, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--light);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+        
+        .badge-new {
+            background: var(--success);
+            color: white;
+        }
+        
+        .badge-popular {
+            background: var(--warning);
+            color: var(--darker);
+        }
+        
+        .badge-exclusive {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* الهيدر */
         header {
+            background-color: var(--darker);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            padding: 1.2rem 0;
+        }
+        
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 2rem auto;
-            max-width: 1200px;
-            padding: 0 1rem;
         }
-
+        
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #00adb5;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
-
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--primary), #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
         .navigation ul {
             display: flex;
-            list-style-type: none;
+            list-style: none;
             gap: 2rem;
         }
-
+        
         .navigation a {
+            color: var(--light);
             text-decoration: none;
-            color: #eeeeee;
             font-size: 1.1rem;
-            transition: color 0.3s;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
         }
-
+        
+        .navigation a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .navigation a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
         .navigation a:hover {
-            color: #00adb5;
+            color: var(--primary);
         }
-
-        hr {
-            opacity: 10%;
-            margin: 1rem 0;
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
-
+        
+        /* الهيرو */
         .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1607513746994-51f730a44832?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 90vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            flex-direction: column;
-            margin: 3rem auto;
-            max-width: 1200px;
             text-align: center;
-            padding: 0 1rem;
+            padding-top: 80px;
         }
-
-        .hero img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 173, 181, 0.3);
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
-
+        
         .hero-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #00adb5;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
-
+        
+        .hero-title span {
+            color: var(--primary);
+        }
+        
         .hero-subtitle {
-            font-size: 1.2rem;
-            color: #94a3b8;
-            margin-bottom: 2rem;
-        }
-
-        .categories {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .category-btn {
-            background-color: #1e293b;
-            color: #f8fafc;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .category-btn:hover {
-            background-color: #00adb5;
-            transform: translateY(-3px);
-        }
-
-        .products-section {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 1rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            color: #00adb5;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background-color: #1e293b;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 173, 181, 0.2);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: contain;
-            background-color: #fff;
-            padding: 10px;
-        }
-
-        .product-info {
-            padding: 1.2rem;
-        }
-
-        .product-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-price {
-            color: #00adb5;
-            font-weight: bold;
             font-size: 1.3rem;
-            margin-bottom: 1rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        .buy-btn {
-            background-color: #00adb5;
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 5px;
-            width: 100%;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-
-        .buy-btn:hover {
-            background-color: #008e94;
-        }
-
-        .social-media {
+        
+        .hero-btns {
             display: flex;
-            justify-content: center;
             gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .social-media a {
-            color: #f8fafc;
-            background-color: #1e293b;
-            padding: 0.8rem;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            transition: all 0.3s;
-            text-decoration: none;
+            margin-top: 2rem;
         }
-
-        .social-media a:hover {
-            background-color: #00adb5;
-            transform: translateY(-3px);
-        }
-
-        footer {
-            background-color: #1e293b;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .footer-text {
-            color: #94a3b8;
-        }
-
-        /* أقسام جديدة */
-        .game-categories {
+        
+        /* فئات المودات */
+        .categories {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 1rem;
-            margin: 2rem 0;
+            margin-bottom: 3rem;
         }
-
-        .game-category-btn {
-            background-color: #1e293b;
-            color: #f8fafc;
+        
+        .category-btn {
+            background: var(--dark-gray);
+            color: var(--light);
             border: none;
-            padding: 0.6rem 1rem;
-            border-radius: 5px;
-            font-size: 0.9rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: 500;
         }
-
-        .game-category-btn:hover {
-            background-color: #00adb5;
+        
+        .category-btn:hover, .category-btn.active {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 173, 181, 0.3);
         }
-
-        .game-category-btn.active {
-            background-color: #00adb5;
-            font-weight: bold;
+        
+        /* شبكة المنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
         }
-
-        @media (max-width: 768px) {
-            .categories, .game-categories {
+        
+        .product-card {
+            background: var(--dark-gray);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 173, 181, 0.3);
+        }
+        
+        .product-badges {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 2;
+        }
+        
+        .product-image-container {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .product-description {
+            color: var(--gray);
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            min-height: 60px;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .product-version {
+            background: rgba(0, 173, 181, 0.2);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        /* قسم المميزات */
+        .features {
+            background: var(--darker);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--dark-gray);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 173, 181, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .feature-description {
+            color: var(--gray);
+        }
+        
+        /* قسم التقييمات */
+        .testimonials .section-title {
+            margin-bottom: 5rem;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: var(--dark-gray);
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: """;
+            font-size: 5rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+        
+        .author-info h4 {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .rating {
+            color: var(--warning);
+            margin-top: 0.5rem;
+        }
+        
+        /* قسم الاشتراكات */
+        .pricing .section-title {
+            margin-bottom: 5rem;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pricing-card {
+            background: var(--dark-gray);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 173, 181, 0.2);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: translateY(-50%) rotate(45deg) translateX(30%);
+            transform-origin: bottom left;
+            width: 150px;
+            text-align: center;
+        }
+        
+        .pricing-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--gray);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            color: var(--gray);
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        /* الفوتر */
+        footer {
+            background: var(--darker);
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        
+        .footer-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-right: 0.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--dark-gray);
+            color: var(--light);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            color: var(--gray);
+        }
+        
+        /* تأثيرات التمرير */
+        .reveal {
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+        
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* التصميم للجوال */
+        @media (max-width: 992px) {
+            .navigation {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background: var(--darker);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.5s ease;
+                z-index: 999;
+            }
+            
+            .navigation.active {
+                right: 0;
+            }
+            
+            .navigation ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 2.5rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-btns {
                 flex-direction: column;
                 align-items: center;
             }
             
-            .navigation ul {
-                gap: 1rem;
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
             }
             
-            .hero-title {
-                font-size: 2rem;
+            .product-title {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- الهيدر -->
     <header>
-        <div class="logo">SHOP_TA1</div>
-        <nav class="navigation">
-            <ul>
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#minecraft">ماين كرافت</a></li>
-                <li><a href="#games">ألعاب أخرى</a></li>
-                <li><a href="#electronics">الإلكترونيات</a></li>
-                <li><a href="#my-produce">منتجاتي</a></li>
-            </ul>
-        </nav>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="MINECRAFT_HUB">
+                <span class="logo-text">MINECRAFT_HUB</span>
+            </a>
+            
+            <nav class="navigation">
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#mods">المودات</a></li>
+                    <li><a href="#textures">التركيبات</a></li>
+                    <li><a href="#shaders">الشادرات</a></li>
+                    <li><a href="#maps">الخرائط</a></li>
+                    <li><a href="#pricing">الاشتراكات</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </header>
 
-    <main>
-        <section id="home" class="hero">
-            <h1 class="hero-title">مرحباً بكم في متجر SHOP_TA1</h1>
-            <p class="hero-subtitle">أحدث الألعاب والعملات الرقمية بأفضل الأسعار</p>
-            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="متجر الألعاب">
+    <!-- الهيرو -->
+    <section id="home" class="hero">
+        <div class="container hero-content reveal">
+            <h1 class="hero-title">أكبر مجموعة <span>مودات ماينكرافت</span> عربية</h1>
+            <p class="hero-subtitle">اكتشف أفضل المودات، الشادرات، التركيبات والخرائط لأحدث إصدارات ماينكرافت مع دعم وتحديثات مستمرة</p>
             
-            <div class="categories">
-                <a href="#minecraft" class="category-btn">ماين كرافت</a>
-                <a href="#games" class="category-btn">ألعاب أخرى</a>
-                <a href="#electronics" class="category-btn">الإلكترونيات</a>
-                <a href="#my-produce" class="category-btn">منتجاتي</a>
+            <div class="hero-btns">
+                <a href="#mods" class="btn">استكشف المودات</a>
+                <a href="#pricing" class="btn btn-outline">الاشتراكات المميزة</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- قسم ماين كرافت -->
-        <section id="minecraft" class="products-section">
-            <h2 class="section-title">منتجات ماين كرافت</h2>
+    <!-- قسم المودات -->
+    <section id="mods" class="products-section">
+        <div class="container">
+            <h2 class="section-title reveal">مودات ماينكرافت</h2>
             
-            <div class="game-categories">
-                <button class="game-category-btn active" onclick="filterProducts('all')">الكل</button>
-                <button class="game-category-btn" onclick="filterProducts('coins')">عملات</button>
-                <button class="game-category-btn" onclick="filterProducts('realms')">ريلمات</button>
-                <button class="game-category-btn" onclick="filterProducts('accounts')">حسابات</button>
-            </div>
-            
-            <div class="products-grid">
-                <!-- عملات ماين كرافت -->
-                <div class="product-card" data-category="coins">
-                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="8800 عملة ماينكرافت" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">8800 عملة ماينكرافت</h3>
-                        <p class="product-price">15 IQD</p>
-                        <button class="buy-btn">شراء الآن</button>
-                    </div>
-                </div>
-                
-                <div class="product-card" data-category="coins">
-                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="1720 عملة ماينكرافت" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">1720 عملة ماينكرافت</h3>
-                        <p class="product-price">5 IQD</p>
-                        <button class="buy-btn">شراء الآن</button>
-                    </div>
-                </div>
-                
-                <div class="product-card" data-category="coins">
-                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="1020 عملة ماينكرافت" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">1020 عملة ماينكرافت</h3>
-                        <p class="product-price">4 IQD</p>
-                        <button class="buy-btn">شراء الآن</button>
-                    </div>
-                </div>
-                
-                <div class="product-card" data-category="coins">
-                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="3500 عملة ماينكرافت" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">3500 عملة ماينكرافت</h3>
-                        <p class="product-price">10 IQD</p>
-                        <button class="buy-btn">شراء الآن</button>
-                    </div>
-                </div>
-                
-                <!-- ريلمات ماين كرافت -->
-                <div class="product-card" data-category="realms">
-                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="ريلم ماينكرافت 30 يوم" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">ريلم ماينكرافت (30 يوم)</h3>
-                        <p class="product-price">25 IQD</p>
-                        <button class="buy-btn">شراء الآن</button>
-                    </div>
-                </div>
-                
-                <div class="product-card" data-category="realms">
-                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="ريلم ماينكرافت 90 يوم" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">ريلم ماينكرافت (90 يوم)</h3>
-                        <p class="product-price">60 IQD</p>
-                        <button class="buy-btn">شراء الآن</button>
-                    </div>
-                </div>
-                
-                <!-- حسابات ماين كرافت -->
-                <div class="product-card" data-category="accounts">
-                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="حساب ماينكرافت بريميوم" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">حساب ماينكرافت بريميوم</h3>
-                        <p class="product-price">50 IQD</p>
-                        <button class="buy-btn">شراء الآن</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- قسم الألعاب الأخرى -->
-        <section id="games" class="products-section">
-            <h2 class="section-title">ألعاب أخرى</h2>
-            
-            <div class="game-categories">
-                <button class="game-category-btn active" onclick="filterOtherGames('all')">الكل</button>
-                <button class="game-category-btn" onclick="filterOtherGames('fortnite')">فورتنيت</button>
-                <button class="game-category-btn" onclick="filterOtherGames('roblox')">روبلوكس</button>
-                <button class="game-category-btn" onclick="filterOtherGames('steam')">ستيم</button>
+            <div class="categories reveal">
+                <button class="category-btn active" onclick="filterProducts('all')">الكل</button>
+                <button class="category-btn" onclick="filterProducts('adventure')">مغامرة</button>
+                <button class="category-btn" onclick="filterProducts('technology')">تكنولوجيا</button>
+                <button class="category-btn" onclick="filterProducts('magic')">سحر</button>
+                <button class="category-btn" onclick="filterProducts('utility')">أدوات</button>
+                <button class="category-btn" onclick="filterProducts('popular')">الأكثر شعبية</button>
             </div>
             
             <div class="products-grid">
-                <!-- منتجات فورتنيت -->
-                <div class="product-card" data-game="fortnite">
-                    <img src="https://cdn2.unrealengine.com/fortnite-256x256-aa365f0ee6c9.png" alt="فورتنيت فبكس" class="product-image">
+                <!-- مود 1 -->
+                <div class="product-card reveal" data-category="technology popular">
+                    <div class="product-badges">
+                        <span class="badge badge-popular">شائع</span>
+                        <span class="badge badge-new">جديد</span>
+                    </div>
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/JqQZbYj.jpg" alt="مود Create" class="product-image">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-title">1000 فبكس فورتنيت</h3>
-                        <p class="product-price">12 IQD</p>
-                        <button class="buy-btn">شراء الآن</button>
+                        <h3 class="product-title">Create Mod <span class="product-version">1.20.1</span></h3>
+                        <p class="product-description">أضف آليات متقدمة ونظام نقل مبتكر يسمح لك ببناء مصانع ومحركات معقدة</p>
+                        <div class="product-meta">
+                            <span class="product-price">25 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- منتجات روبلوكس -->
-                <div class="product-card" data-game="roblox">
-                    <img src="https://tr.rbxcdn.com/8d5a8b6e0a3c4e3f0c0d5c3a0a3c4e3f/420/420/Image/Png" alt="روبلوكس روبكس" class="product-image">
+                <!-- مود 2 -->
+                <div class="product-card reveal" data-category="magic popular">
+                    <div class="product-badges">
+                        <span class="badge badge-popular">شائع</span>
+                    </div>
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/VxGqL2u.jpg" alt="مود Thaumcraft" class="product-image">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-title">800 روبكس روبلوكس</h3>
-                        <p class="product-price">10 IQD</p>
-                        <button class="buy-btn">شراء الآن</button>
+                        <h3 class="product-title">Thaumcraft 6 <span class="product-version">1.12.2</span></h3>
+                        <p class="product-description">نظام سحري متكامل مع أبحاث، تعاويذ، كائنات سحرية وعوالم غريبة</p>
+                        <div class="product-meta">
+                            <span class="product-price">20 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- منتجات ستيم -->
-                <div class="product-card" data-game="steam">
-                    <img src="https://cdn.cloudflare.steamstatic.com/store/home/store_home_share.jpg" alt="ستيم وااليت" class="product-image">
+                <!-- مود 3 -->
+                <div class="product-card reveal" data-category="adventure">
+                    <div class="product-badges">
+                        <span class="badge badge-new">جديد</span>
+                    </div>
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/mZ8vB9x.jpg" alt="مود Twilight Forest" class="product-image">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-title">20$ ستيم وااليت</h3>
-                        <p class="product-price">30 IQD</p>
-                        <button class="buy-btn">شراء الآن</button>
+                        <h3 class="product-title">Twilight Forest <span class="product-version">1.19.2</span></h3>
+                        <p class="product-description">عالم غامض مليء بالأسرار، الوحوش والأدوار مع نظام تقدم فريد</p>
+                        <div class="product-meta">
+                            <span class="product-price">30 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- مود 4 -->
+                <div class="product-card reveal" data-category="technology">
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/pLmY7Xz.jpg" alt="مود Industrial Craft" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Industrial Craft 2 <span class="product-version">1.7.10</span></h3>
+                        <p class="product-description">أضف أنظمة طاقة متقدمة، آلات صناعية وتقنيات متطورة للعبة</p>
+                        <div class="product-meta">
+                            <span class="product-price">15 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- مود 5 -->
+                <div class="product-card reveal" data-category="utility popular">
+                    <div class="product-badges">
+                        <span class="badge badge-popular">شائع</span>
+                    </div>
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/QzZQZQz.jpg" alt="مود JEI" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">JEI <span class="product-version">1.20.1</span></h3>
+                        <p class="product-description">أداة أساسية تظهر جميع الوصفات والعناصر في اللعبة مع إمكانيات بحث متقدمة</p>
+                        <div class="product-meta">
+                            <span class="product-price">10 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- مود 6 -->
+                <div class="product-card reveal" data-category="magic">
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/zZzZzZz.jpg" alt="مود Botania" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Botania <span class="product-version">1.19.2</span></h3>
+                        <p class="product-description">نظام سحري يعتمد على الطبيعة والزهور مع آليات فريدة ووصفات سحرية</p>
+                        <div class="product-meta">
+                            <span class="product-price">25 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- قسم الإلكترونيات -->
-        <section id="electronics" class="products-section">
-            <h2 class="section-title">المنتجات الإلكترونية</h2>
+    <!-- قسم المميزات -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title reveal">لماذا تختارنا؟</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="feature-title">تحديثات مستمرة</h3>
+                    <p class="feature-description">جميع المودات يتم تحديثها فور صدور إصدارات جديدة من اللعبة</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">دعم فني 24/7</h3>
+                    <p class="feature-description">فريق دعم فني متاح على مدار الساعة لمساعدتك في أي مشكلة</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">آمن وخالي من الفيروسات</h3>
+                    <p class="feature-description">جميع الملفات يتم فحصها بدقة قبل الرفع لضمان سلامتها</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="feature-title">تحميل سريع</h3>
+                    <p class="feature-description">سيرفرات سحابية سريعة لتحميل الملفات بأقصى سرعة ممكنة</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 class="feature-title">ترجمة عربية</h3>
+                    <p class="feature-description">جميع المودات مدعومة باللغة العربية مع شرح مفصل لكل مود</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="feature-title">حصري</h3>
+                    <p class="feature-description">مودات حصرية لا تجدها في أي مكان آخر مع ميزات خاصة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التركيبات -->
+    <section id="textures" class="products-section">
+        <div class="container">
+            <h2 class="section-title reveal">تركيبات ماينكرافت</h2>
+            
+            <div class="categories reveal">
+                <button class="category-btn active" onclick="filterTextures('all')">الكل</button>
+                <button class="category-btn" onclick="filterTextures('realistic')">واقعية</button>
+                <button class="category-btn" onclick="filterTextures('fantasy')">خيالية</button>
+                <button class="category-btn" onclick="filterTextures('cartoon')">كرتونية</button>
+                <button class="category-btn" onclick="filterTextures('popular')">الأكثر شعبية</button>
+            </div>
+            
             <div class="products-grid">
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1526&q=80" alt="إلكترونيات" class="product-image">
+                <!-- تركيبة 1 -->
+                <div class="product-card reveal" data-category="realistic popular">
+                    <div class="product-badges">
+                        <span class="badge badge-popular">شائع</span>
+                    </div>
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/rRrRrRr.jpg" alt="تركيبة Faithful" class="product-image">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-title">قريباً</h3>
-                        <p class="product-price">-- IQD</p>
-                        <button class="buy-btn" disabled>قريباً</button>
+                        <h3 class="product-title">Faithful 32x <span class="product-version">1.20+</span></h3>
+                        <p class="product-description">تركيبة كلاسيكية تحافظ على مظهر اللعبة الأصلي مع دقة أعلى</p>
+                        <div class="product-meta">
+                            <span class="product-price">15 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="إلكترونيات" class="product-image">
+                <!-- تركيبة 2 -->
+                <div class="product-card reveal" data-category="realistic">
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/sSsSsSs.jpg" alt="تركيبة SEUS Renewed" class="product-image">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-title">قريباً</h3>
-                        <p class="product-price">-- IQD</p>
-                        <button class="buy-btn" disabled>قريباً</button>
+                        <h3 class="product-title">SEUS Renewed <span class="product-version">1.19.2</span></h3>
+                        <p class="product-description">تركيبة واقعية مع تأثيرات ضوئية مذهلة تحتاج شادرات لدعمها</p>
+                        <div class="product-meta">
+                            <span class="product-price">25 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- تركيبة 3 -->
+                <div class="product-card reveal" data-category="fantasy popular">
+                    <div class="product-badges">
+                        <span class="badge badge-popular">شائع</span>
+                    </div>
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/tTtTtTt.jpg" alt="تركيبة Mythic" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Mythic <span class="product-version">1.20.1</span></h3>
+                        <p class="product-description">تركيبة خيالية بتصميمات فريدة تناسب عوالم المغامرات والسحر</p>
+                        <div class="product-meta">
+                            <span class="product-price">20 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- قسم منتجاتي -->
-        <section id="my-produce" class="products-section">
-            <h2 class="section-title">منتجاتي الخاصة</h2>
+    <!-- قسم الشادرات -->
+    <section id="shaders" class="products-section">
+        <div class="container">
+            <h2 class="section-title reveal">شادرات ماينكرافت</h2>
+            
+            <div class="categories reveal">
+                <button class="category-btn active" onclick="filterShaders('all')">الكل</button>
+                <button class="category-btn" onclick="filterShaders('realistic')">واقعية</button>
+                <button class="category-btn" onclick="filterShaders('light')">خفيفة</button>
+                <button class="category-btn" onclick="filterShaders('popular')">الأكثر شعبية</button>
+            </div>
+            
             <div class="products-grid">
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="منتجات خاصة" class="product-image">
+                <!-- شادر 1 -->
+                <div class="product-card reveal" data-category="realistic popular">
+                    <div class="product-badges">
+                        <span class="badge badge-popular">شائع</span>
+                        <span class="badge badge-exclusive">حصري</span>
+                    </div>
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/uUuUuUu.jpg" alt="شادر BSL" class="product-image">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-title">تصميم مواقع ويب</h3>
-                        <p class="product-price">100 IQD</p>
-                        <button class="buy-btn">اطلب الآن</button>
+                        <h3 class="product-title">BSL Shaders <span class="product-version">1.20.1</span></h3>
+                        <p class="product-description">واحد من أفضل الشادرات مع توازن رائع بين الأداء والجماليات</p>
+                        <div class="product-meta">
+                            <span class="product-price">30 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="منتجات خاصة" class="product-image">
+                <!-- شادر 2 -->
+                <div class="product-card reveal" data-category="realistic">
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/vVvVvVv.jpg" alt="شادر SEUS" class="product-image">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-title">تطبيقات جوال</h3>
-                        <p class="product-price">150 IQD</p>
-                        <button class="buy-btn">اطلب الآن</button>
+                        <h3 class="product-title">SEUS PTGI <span class="product-version">1.19.2</span></h3>
+                        <p class="product-description">شادر واقعي مع تتبع الأشعة يحتاج جهاز قوي لكن النتائج مذهلة</p>
+                        <div class="product-meta">
+                            <span class="product-price">40 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- شادر 3 -->
+                <div class="product-card reveal" data-category="light popular">
+                    <div class="product-badges">
+                        <span class="badge badge-popular">شائع</span>
+                    </div>
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/wWwWwWw.jpg" alt="شادر Sildur's" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sildur's Vibrant <span class="product-version">1.20+</span></h3>
+                        <p class="product-description">شادر خفيف مع ألوان زاهية وأداء ممتاز حتى على الأجهزة الضعيفة</p>
+                        <div class="product-meta">
+                            <span class="product-price">20 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- قسم وسائل التواصل الاجتماعي -->
-        <section class="social-section">
-            <h2 class="section-title">تواصل معنا</h2>
-            <div class="social-media">
-                <a href="https://www.instagram.com/shop_ta1" target="_blank" title="إنستغرام">
-                    <i>Instagram</i>
-                </a>
-                <a href="https://www.youtube.com/@axuuy" target="_blank" title="يوتيوب">
-                    <i>YouTube</i>
-                </a>
-                <a href="https://wa.me/qr/YOSO75SYT5TFN1" target="_blank" title="واتساب">
-                    <i>WhatsApp</i>
-                </a>
-                <a href="https://discord.gg/QXJ2ya2c" target="_blank" title="دسكورد">
-                    <i>discord</i>
-                </a>
-                <a href="https://www.instagram.com/zx6sq/" target="_blank" title="instgram">
-                    <i>instgram</i>
-                </a>
+    <!-- قسم الخرائط -->
+    <section id="maps" class="products-section">
+        <div class="container">
+            <h2 class="section-title reveal">خرائط ماينكرافت</h2>
+            
+            <div class="categories reveal">
+                <button class="category-btn active" onclick="filterMaps('all')">الكل</button>
+                <button class="category-btn" onclick="filterMaps('adventure')">مغامرة</button>
+                <button class="category-btn" onclick="filterMaps('parkour')">باركور</button>
+                <button class="category-btn" onclick="filterMaps('puzzle')">ألغاز</button>
+                <button class="category-btn" onclick="filterMaps('popular')">الأكثر شعبية</button>
             </div>
-        </section>
-    </main>
+            
+            <div class="products-grid">
+                <!-- خريطة 1 -->
+                <div class="product-card reveal" data-category="adventure popular">
+                    <div class="product-badges">
+                        <span class="badge badge-popular">شائع</span>
+                    </div>
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/xXxXxXx.jpg" alt="خريطة RLCraft" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">RLCraft Adventure <span class="product-version">1.12.2</span></h3>
+                        <p class="product-description">خريطة مغامرات صعبة مع تحديات قاسية وواقعية تحتاج إلى استراتيجية</p>
+                        <div class="product-meta">
+                            <span class="product-price">35 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- خريطة 2 -->
+                <div class="product-card reveal" data-category="parkour">
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/yYyYyYy.jpg" alt="خريطة Parkour Heaven" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Parkour Heaven <span class="product-version">1.20.1</span></h3>
+                        <p class="product-description">أكثر من 100 مرحلة باركور بتصميمات إبداعية وتحديات متدرجة</p>
+                        <div class="product-meta">
+                            <span class="product-price">25 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- خريطة 3 -->
+                <div class="product-card reveal" data-category="puzzle popular">
+                    <div class="product-badges">
+                        <span class="badge badge-popular">شائع</span>
+                    </div>
+                    <div class="product-image-container">
+                        <img src="https://i.imgur.com/zZzZzZz.jpg" alt="خريطة Escape Room" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Escape Room <span class="product-version">1.19.2</span></h3>
+                        <p class="product-description">سلسلة غرف هروب مع ألغاز ذكية تحتاج إلى تفكير خارج الصندوق</p>
+                        <div class="product-meta">
+                            <span class="product-price">30 IQD</span>
+                            <button class="btn">تحميل الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <footer>
-        <p class="footer-text">© 2025 متجر SHOP_TA1. جميع الحقوق محفوظة.</p>
+    <!-- قسم التقييمات -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title reveal">آراء عملائنا</h2>
+            
+            <div class="testimonials-grid">
+                <!-- تقييم 1 -->
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-content">
+                        "أفضل موقع لتحميل مودات ماينكرافت باللغة العربية! الملفات آمنة والتحديثات سريعة. فريق الدعم ساعدني في حل مشكلتي خلال دقائق."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="أحمد" class="author-avatar">
+                        <div class="author-info">
+                            <h4>أحمد محمد</h4>
+                            <p>مطور محتوى ماينكرافت</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- تقييم 2 -->
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-content">
+                        "الاشتراك المميز يستحق كل فلس! تحميل سريع، مودات حصرية، ودعم فني ممتاز. أنصح كل محبي ماينكرافت بهذا الموقع الرائع."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="نور" class="author-avatar">
+                        <div class="author-info">
+                            <h4>نور حسن</h4>
+                            <p>لاعبة ماينكرافت محترفة</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- تقييم 3 -->
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-content">
+                        "كنت أخشى تحميل المودات من المواقع الأخرى بسبب الفيروسات، لكن هذا الموقع مختلف تماماً. جميع الملفات مفحوصة وآمنة. شكراً لكم!"
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="علي" class="author-avatar">
+                        <div class="author-info">
+                            <h4>علي كريم</h4>
+                            <p>مدرس</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الاشتراكات -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title reveal">خطط الاشتراك</h2>
+            
+            <div class="pricing-grid">
+                <!-- اشتراك أساسي -->
+                <div class="pricing-card reveal">
+                    <h3 class="pricing-title">بيسك</h3>
+                    <div class="pricing-price">10 <span>IQD/شهر</span></div>
+                    <ul class="pricing-features">
+                        <li>تحميل حتى 5 مودات يومياً</li>
+                        <li>سرعة تحميل عادية</li>
+                        <li>دعم فني خلال 24 ساعة</li>
+                        <li>وصول إلى المودات الأساسية</li>
+                        <li>لا يوجد مودات حصرية</li>
+                    </ul>
+                    <button class="btn btn-outline">اختر هذه الخطة</button>
+                </div>
+                
+                <!-- اشتراك مميز -->
+                <div class="pricing-card popular reveal">
+                    <div class="popular-badge">الأكثر شعبية</div>
+                    <h3 class="pricing-title">بريميوم</h3>
+                    <div class="pricing-price">25 <span>IQD/شهر</span></div>
+                    <ul class="pricing-features">
+                        <li>تحميل غير محدود</li>
+                        <li>سرعة تحميل فائقة</li>
+                        <li>دعم فني فوري</li>
+                        <li>وصول إلى جميع المودات</li>
+                        <li>10 مودات حصرية شهرياً</li>
+                        <li>خصومات على الخرائط</li>
+                    </ul>
+                    <button class="btn">اختر هذه الخطة</button>
+                </div>
+                
+                <!-- اشتراك محترف -->
+                <div class="pricing-card reveal">
+                    <h3 class="pricing-title">برو</h3>
+                    <div class="pricing-price">50 <span>IQD/شهر</span></div>
+                    <ul class="pricing-features">
+                        <li>كل ميزات بريميوم</li>
+                        <li>دعم فني مميز 24/7</li>
+                        <li>وصول مبكر للمودات الجديدة</li>
+                        <li>مودات حصرية غير محدودة</li>
+                        <li>طلبات مودات مخصصة</li>
+                        <li>خصم 30% على جميع المنتجات</li>
+                    </ul>
+                    <button class="btn btn-outline">اختر هذه الخطة</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">MINECRAFT_HUB</a>
+                    <p class="footer-description">أكبر مجتمع عربي لمحبي ماينكرافت. نوفر أفضل المودات، الشادرات، التركيبات والخرائط لأحدث إصدارات اللعبة.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#mods">المودات</a></li>
+                        <li><a href="#textures">التركيبات</a></li>
+                        <li><a href="#shaders">الشادرات</a></li>
+                        <li><a href="#maps">الخرائط</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">الدعم</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                        <li><a href="#">تواصل مع الدعم</a></li>
+                        <li><a href="#">كيفية التثبيت</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">اتصل بنا</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> support@minecraft-hub.com</li>
+                        <li><i class="fas fa-phone"></i> +964 123 456 789</li>
+                        <li><i class="fas fa-map-marker-alt"></i> بغداد، العراق</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 MINECRAFT_HUB. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // فلترة منتجات ماين كرافت حسب الفئة
+        // فلترة المودات
         function filterProducts(category) {
-            const products = document.querySelectorAll('#minecraft .product-card');
-            const buttons = document.querySelectorAll('#minecraft .game-category-btn');
+            const products = document.querySelectorAll('#mods .product-card');
+            const buttons = document.querySelectorAll('#mods .category-btn');
             
             buttons.forEach(btn => {
                 btn.classList.remove('active');
@@ -504,7 +1315,7 @@
             });
             
             products.forEach(product => {
-                if (category === 'all' || product.dataset.category === category) {
+                if (category === 'all' || product.dataset.category.includes(category)) {
                     product.style.display = 'block';
                 } else {
                     product.style.display = 'none';
@@ -512,20 +1323,62 @@
             });
         }
         
-        // فلترة الألعاب الأخرى حسب الفئة
-        function filterOtherGames(game) {
-            const products = document.querySelectorAll('#games .product-card');
-            const buttons = document.querySelectorAll('#games .game-category-btn');
+        // فلترة التركيبات
+        function filterTextures(category) {
+            const products = document.querySelectorAll('#textures .product-card');
+            const buttons = document.querySelectorAll('#textures .category-btn');
             
             buttons.forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent.includes(getGameName(game))) {
+                if (btn.textContent.includes(getCategoryName(category))) {
                     btn.classList.add('active');
                 }
             });
             
             products.forEach(product => {
-                if (game === 'all' || product.dataset.game === game) {
+                if (category === 'all' || product.dataset.category.includes(category)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+        
+        // فلترة الشادرات
+        function filterShaders(category) {
+            const products = document.querySelectorAll('#shaders .product-card');
+            const buttons = document.querySelectorAll('#shaders .category-btn');
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(getCategoryName(category))) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category.includes(category)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+        
+        // فلترة الخرائط
+        function filterMaps(category) {
+            const products = document.querySelectorAll('#maps .product-card');
+            const buttons = document.querySelectorAll('#maps .category-btn');
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(getCategoryName(category))) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category.includes(category)) {
                     product.style.display = 'block';
                 } else {
                     product.style.display = 'none';
@@ -536,22 +1389,52 @@
         function getCategoryName(category) {
             const names = {
                 'all': 'الكل',
-                'coins': 'عملات',
-                'realms': 'ريلمات',
-                'accounts': 'حسابات'
+                'adventure': 'مغامرة',
+                'technology': 'تكنولوجيا',
+                'magic': 'سحر',
+                'utility': 'أدوات',
+                'popular': 'الأكثر شعبية',
+                'realistic': 'واقعية',
+                'fantasy': 'خيالية',
+                'cartoon': 'كرتونية',
+                'light': 'خفيفة',
+                'parkour': 'باركور',
+                'puzzle': 'ألغاز'
             };
             return names[category] || '';
         }
         
-        function getGameName(game) {
-            const names = {
-                'all': 'الكل', 
-                'fortnite': 'فورتنيت',
-                'roblox': 'روبلوكس',
-                'steam': 'ستيم'
-            };
-            return names[game] || '';
+        // القائمة المتنقلة
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navigation = document.querySelector('.navigation');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navigation.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navigation.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // تأثير التمرير
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const revealTop = reveals[i].getBoundingClientRect().top;
+                const revealPoint = 150;
+                
+                if (revealTop < windowHeight - revealPoint) {
+                    reveals[i].classList.add('active');
+                }
+            }
         }
+        
+        window.addEventListener('scroll', reveal);
+        
+        // تنشيط التأثير عند التحميل
+        window.addEventListener('load', () => {
+            reveal();
+        });
     </script>
 </body>
 </html>
