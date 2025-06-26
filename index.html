@@ -1,14 +1,557 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello world project</title>
-  </head>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر SHOP_TA1 للألعاب والإلكترونيات</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap");
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: "Tajawal", sans-serif;
+        }
 
-  <body>
-    <div id="root"></div>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
 
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00adb5;
+        }
+
+        .navigation ul {
+            display: flex;
+            list-style-type: none;
+            gap: 2rem;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: #eeeeee;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .navigation a:hover {
+            color: #00adb5;
+        }
+
+        hr {
+            opacity: 10%;
+            margin: 1rem 0;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 3rem auto;
+            max-width: 1200px;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .hero img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 173, 181, 0.3);
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #00adb5;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .category-btn {
+            background-color: #1e293b;
+            color: #f8fafc;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover {
+            background-color: #00adb5;
+            transform: translateY(-3px);
+        }
+
+        .products-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #00adb5;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 173, 181, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .product-info {
+            padding: 1.2rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: #00adb5;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .buy-btn {
+            background-color: #00adb5;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .buy-btn:hover {
+            background-color: #008e94;
+        }
+
+        .social-media {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-media a {
+            color: #f8fafc;
+            background-color: #1e293b;
+            padding: 0.8rem;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-media a:hover {
+            background-color: #00adb5;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background-color: #1e293b;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-text {
+            color: #94a3b8;
+        }
+
+        /* أقسام جديدة */
+        .game-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .game-category-btn {
+            background-color: #1e293b;
+            color: #f8fafc;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .game-category-btn:hover {
+            background-color: #00adb5;
+        }
+
+        .game-category-btn.active {
+            background-color: #00adb5;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .categories, .game-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .navigation ul {
+                gap: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">SHOP_TA1</div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#minecraft">ماين كرافت</a></li>
+                <li><a href="#games">ألعاب أخرى</a></li>
+                <li><a href="#electronics">الإلكترونيات</a></li>
+                <li><a href="#my-produce">منتجاتي</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1 class="hero-title">مرحباً بكم في متجر SHOP_TA1</h1>
+            <p class="hero-subtitle">أحدث الألعاب والعملات الرقمية بأفضل الأسعار</p>
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="متجر الألعاب">
+            
+            <div class="categories">
+                <a href="#minecraft" class="category-btn">ماين كرافت</a>
+                <a href="#games" class="category-btn">ألعاب أخرى</a>
+                <a href="#electronics" class="category-btn">الإلكترونيات</a>
+                <a href="#my-produce" class="category-btn">منتجاتي</a>
+            </div>
+        </section>
+
+        <!-- قسم ماين كرافت -->
+        <section id="minecraft" class="products-section">
+            <h2 class="section-title">منتجات ماين كرافت</h2>
+            
+            <div class="game-categories">
+                <button class="game-category-btn active" onclick="filterProducts('all')">الكل</button>
+                <button class="game-category-btn" onclick="filterProducts('coins')">عملات</button>
+                <button class="game-category-btn" onclick="filterProducts('realms')">ريلمات</button>
+                <button class="game-category-btn" onclick="filterProducts('accounts')">حسابات</button>
+            </div>
+            
+            <div class="products-grid">
+                <!-- عملات ماين كرافت -->
+                <div class="product-card" data-category="coins">
+                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="8800 عملة ماينكرافت" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">8800 عملة ماينكرافت</h3>
+                        <p class="product-price">15 IQD</p>
+                        <button class="buy-btn">شراء الآن</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="coins">
+                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="1720 عملة ماينكرافت" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">1720 عملة ماينكرافت</h3>
+                        <p class="product-price">5 IQD</p>
+                        <button class="buy-btn">شراء الآن</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="coins">
+                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="1020 عملة ماينكرافت" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">1020 عملة ماينكرافت</h3>
+                        <p class="product-price">4 IQD</p>
+                        <button class="buy-btn">شراء الآن</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="coins">
+                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="3500 عملة ماينكرافت" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">3500 عملة ماينكرافت</h3>
+                        <p class="product-price">10 IQD</p>
+                        <button class="buy-btn">شراء الآن</button>
+                    </div>
+                </div>
+                
+                <!-- ريلمات ماين كرافت -->
+                <div class="product-card" data-category="realms">
+                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="ريلم ماينكرافت 30 يوم" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">ريلم ماينكرافت (30 يوم)</h3>
+                        <p class="product-price">25 IQD</p>
+                        <button class="buy-btn">شراء الآن</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="realms">
+                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="ريلم ماينكرافت 90 يوم" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">ريلم ماينكرافت (90 يوم)</h3>
+                        <p class="product-price">60 IQD</p>
+                        <button class="buy-btn">شراء الآن</button>
+                    </div>
+                </div>
+                
+                <!-- حسابات ماين كرافت -->
+                <div class="product-card" data-category="accounts">
+                    <img src="https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-logo.svg" alt="حساب ماينكرافت بريميوم" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">حساب ماينكرافت بريميوم</h3>
+                        <p class="product-price">50 IQD</p>
+                        <button class="buy-btn">شراء الآن</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الألعاب الأخرى -->
+        <section id="games" class="products-section">
+            <h2 class="section-title">ألعاب أخرى</h2>
+            
+            <div class="game-categories">
+                <button class="game-category-btn active" onclick="filterOtherGames('all')">الكل</button>
+                <button class="game-category-btn" onclick="filterOtherGames('fortnite')">فورتنيت</button>
+                <button class="game-category-btn" onclick="filterOtherGames('roblox')">روبلوكس</button>
+                <button class="game-category-btn" onclick="filterOtherGames('steam')">ستيم</button>
+            </div>
+            
+            <div class="products-grid">
+                <!-- منتجات فورتنيت -->
+                <div class="product-card" data-game="fortnite">
+                    <img src="https://cdn2.unrealengine.com/fortnite-256x256-aa365f0ee6c9.png" alt="فورتنيت فبكس" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">1000 فبكس فورتنيت</h3>
+                        <p class="product-price">12 IQD</p>
+                        <button class="buy-btn">شراء الآن</button>
+                    </div>
+                </div>
+                
+                <!-- منتجات روبلوكس -->
+                <div class="product-card" data-game="roblox">
+                    <img src="https://tr.rbxcdn.com/8d5a8b6e0a3c4e3f0c0d5c3a0a3c4e3f/420/420/Image/Png" alt="روبلوكس روبكس" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">800 روبكس روبلوكس</h3>
+                        <p class="product-price">10 IQD</p>
+                        <button class="buy-btn">شراء الآن</button>
+                    </div>
+                </div>
+                
+                <!-- منتجات ستيم -->
+                <div class="product-card" data-game="steam">
+                    <img src="https://cdn.cloudflare.steamstatic.com/store/home/store_home_share.jpg" alt="ستيم وااليت" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">20$ ستيم وااليت</h3>
+                        <p class="product-price">30 IQD</p>
+                        <button class="buy-btn">شراء الآن</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الإلكترونيات -->
+        <section id="electronics" class="products-section">
+            <h2 class="section-title">المنتجات الإلكترونية</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1526&q=80" alt="إلكترونيات" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">قريباً</h3>
+                        <p class="product-price">-- IQD</p>
+                        <button class="buy-btn" disabled>قريباً</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="إلكترونيات" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">قريباً</h3>
+                        <p class="product-price">-- IQD</p>
+                        <button class="buy-btn" disabled>قريباً</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم منتجاتي -->
+        <section id="my-produce" class="products-section">
+            <h2 class="section-title">منتجاتي الخاصة</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="منتجات خاصة" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">تصميم مواقع ويب</h3>
+                        <p class="product-price">100 IQD</p>
+                        <button class="buy-btn">اطلب الآن</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="منتجات خاصة" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">تطبيقات جوال</h3>
+                        <p class="product-price">150 IQD</p>
+                        <button class="buy-btn">اطلب الآن</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم وسائل التواصل الاجتماعي -->
+        <section class="social-section">
+            <h2 class="section-title">تواصل معنا</h2>
+            <div class="social-media">
+                <a href="https://www.instagram.com/shop_ta1" target="_blank" title="إنستغرام">
+                    <i>Instagram</i>
+                </a>
+                <a href="https://www.youtube.com/@axuuy" target="_blank" title="يوتيوب">
+                    <i>YouTube</i>
+                </a>
+                <a href="https://wa.me/qr/YOSO75SYT5TFN1" target="_blank" title="واتساب">
+                    <i>WhatsApp</i>
+                </a>
+                <a href="https://discord.gg/QXJ2ya2c" target="_blank" title="دسكورد">
+                    <i>discord</i>
+                </a>
+                <a href="https://www.instagram.com/zx6sq/" target="_blank" title="instgram">
+                    <i>instgram</i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="footer-text">© 2025 متجر SHOP_TA1. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // فلترة منتجات ماين كرافت حسب الفئة
+        function filterProducts(category) {
+            const products = document.querySelectorAll('#minecraft .product-card');
+            const buttons = document.querySelectorAll('#minecraft .game-category-btn');
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(getCategoryName(category))) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+        
+        // فلترة الألعاب الأخرى حسب الفئة
+        function filterOtherGames(game) {
+            const products = document.querySelectorAll('#games .product-card');
+            const buttons = document.querySelectorAll('#games .game-category-btn');
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(getGameName(game))) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            products.forEach(product => {
+                if (game === 'all' || product.dataset.game === game) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+        
+        function getCategoryName(category) {
+            const names = {
+                'all': 'الكل',
+                'coins': 'عملات',
+                'realms': 'ريلمات',
+                'accounts': 'حسابات'
+            };
+            return names[category] || '';
+        }
+        
+        function getGameName(game) {
+            const names = {
+                'all': 'الكل', 
+                'fortnite': 'فورتنيت',
+                'roblox': 'روبلوكس',
+                'steam': 'ستيم'
+            };
+            return names[game] || '';
+        }
+    </script>
+</body>
 </html>
